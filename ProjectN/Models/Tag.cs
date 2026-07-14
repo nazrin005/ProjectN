@@ -2,7 +2,7 @@
 
 namespace ProjectN.Models
 {
-    public class Category : BaseEntity
+    public class Tag :BaseEntity
     {
         public string Name { get; set; }
         public List<Product> Products { get; set; }

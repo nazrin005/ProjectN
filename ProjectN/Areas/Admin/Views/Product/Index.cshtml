@@ -1,0 +1,64 @@
+﻿@using ProjectN.Models
+@model List<Product>
+<div>
+    <a asp-controller="Product" asp-action="Create" class="btn btn-primary">Create Product</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col">Category</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Deleted Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (Product product in Model)
+            {
+                <tr>
+                    <th scope="row">@product.Id</th>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td>@product.Description</td>
+                    <td>
+                        <img height="80px" width="80px" src="~/uploads/products/@product.ImageUrl" />
+                    </td>
+                    <td>@product.Category.Name</td>
+                    <td>
+                        @{
+                            foreach (Tag tag in product.Tags)
+                            {
+                                @tag.Name
+                                <br />
+                            }
+                        }
+                    </td>                 
+                    <td>@product.IsDeleted</td>
+                  
+                    <td>
+                        @if (product.IsDeleted)
+                        {
+                            <form asp-controller="Product" asp-action="Restore" asp-route-id="@product.Id">
+                                <button type="submit" class="btn btn-success">Restore</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" asp-controller="Product" asp-action="Update" asp-route-id="@product.Id">Update</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

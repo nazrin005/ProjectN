@@ -1,0 +1,13 @@
+﻿@using ProjectN.Areas.Admin.ViewModels.Categories
+@model CreateCategoryVM
+<div>
+    <h2>Create Category</h2>
+    <form asp-controller="Category" asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="Name">Name</label>
+            <input asp-for="Name" type="text" class="form-control" id="Name" placeholder="Enter name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>

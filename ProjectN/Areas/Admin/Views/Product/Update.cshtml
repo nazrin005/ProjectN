@@ -1,0 +1,52 @@
+﻿@using ProjectN.Areas.Admin.ViewModels.Products
+@using ProjectN.Models
+@model UpdateProductVM
+<div>
+    <h2>Update Product</h2>
+    <form asp-controller="Product" asp-action="Update" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Product Name</label>
+            <input asp-for="@Model.Name" type="text" class="form-control" id="name" placeholder="Enter Product">
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Price">Price</label>
+                <input asp-for="@Model.Price" type="text" class="form-control" id="Price" placeholder="Enter Price">
+                    <span asp-validation-for="@Model.Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Description">Description</label>
+                    <input asp-for="@Model.Description" type="text" class="form-control" id="Description" placeholder="Enter Description">
+                        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="ImageFile">Select Image</label>
+                        <input asp-for="@Model.ImageFile" type="file" class="form-control" id="ImageFile">
+                            <span asp-validation-for="@Model.ImageFile" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <select asp-for="CategoryId" class="form-select" aria-label="Select Category">
+                                <option disabled selected>Open this select menu</option>
+                                @foreach (Category category in ViewBag.Categories)
+                                {
+                                    <option value="@category.Id" class="text-danger">@category.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <select asp-for="TagIds" class="form-select" multiple aria-label="multiple select Tags">
+                                <option selected disabled>Select Tag</option>
+                                @{
+                                    foreach (Tag tag in ViewBag.Tags)
+                                    {
+                                        <option value="@tag.Id">@tag.Name</option>
+                                        
+                                    }
+                                }
+                            </select>
+                            <span asp-validation-for="@Model.TagIds" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>

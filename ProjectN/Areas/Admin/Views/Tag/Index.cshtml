@@ -1,0 +1,36 @@
+﻿@using ProjectN.Models
+@model List<Tag>
+<a asp-controller="Tag" asp-action="Create" class="btn btn-primary">Create Tag</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Deleted Status</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (Tag tag in Model)
+            {
+                <tr>
+                    <th scope="row">@tag.Id</th>
+                    <td>@tag.Name</td>
+                    <td>@tag.IsDeleted</td>
+                    <td>
+                        @if (tag.IsDeleted == true)
+                        {
+                            <form asp-controller="Tag" asp-action="Restore" asp-route-id="@tag.Id"><button type="submit" class="btn btn-success">Restore</button></form>
+                        }
+                        else
+                        {
+                            <form asp-controller="Tag" asp-action="Delete" asp-route-id="@tag.Id"><button type="submit" class="btn btn-danger">Delete</button></form>
+                        }
+                    </td>
+                    <td><a asp-controller="Tag" asp-action="Update" asp-route-id="@tag.Id" class="btn btn-warning">Update</a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

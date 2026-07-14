@@ -1,0 +1,21 @@
+﻿namespace ProjectN.Utilities
+{
+    public static class FileUploadExtension
+    {
+        public static string SaveImage(this IFormFile ImageFile, IWebHostEnvironment env, string folder)
+        {
+            string path = Path.Combine(env.WebRootPath, folder);
+            string fileName = ImageFile.FileName;
+            string fullpath = Path.Combine(path, fileName);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            using (FileStream stream = new FileStream(fullpath, FileMode.Create))
+            {
+                ImageFile.CopyTo(stream);
+            }
+            return fileName;
+        }
+    }
+}

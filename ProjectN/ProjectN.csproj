@@ -22,8 +22,4 @@
     <None Include="wwwroot\assets\vendors\linericon\.DS_Store" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\ViewModels\" />
-  </ItemGroup>
-
 </Project>
