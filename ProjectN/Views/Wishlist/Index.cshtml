@@ -1,0 +1,40 @@
+﻿@using ProjectN.Models
+@model List<ProjectN.Models.Wishlist>
+@foreach (Wishlist item in Model)
+{
+                                              
+    <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="card text-center card-product">
+            <div class="card-product__img">
+                <img class="card-img" src="~/uploads/products/@item.Product.ImageUrl" alt="">
+                    <ul class="card-product__imgOverlay">
+                        <li><button><a asp-controller="Home" asp-action="Details" asp-route-id="@item.Product.Id" class="ti-search"></a></button></li>
+                        <li><button><i class="ti-shopping-cart"></i></button></li>
+                        <li>
+                            <a asp-controller="Wishlist"
+                                   asp-action="Toggle"
+                                   asp-route-id="@item.Product.Id">
+
+                                <li>
+                                    <a asp-controller="Wishlist"
+                                           asp-action="Toggle"
+                                           asp-route-id="@item.Product.Id">
+
+                                        <i class="fas fa-heart text-danger"></i>
+
+                                    </a>
+                                </li>
+
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <p>@item.Product.Category.Name</p>
+                    <h4 class="card-product__title"><a href="single-product.html">@item.Product.Name</a></h4>
+                    <p class="card-product__price">$@item.Product.Price</p>
+                </div>
+            </div>
+        </div>
+               
+    }

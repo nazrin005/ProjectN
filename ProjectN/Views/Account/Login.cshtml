@@ -36,11 +36,11 @@
 					<form asp-controller="Account" asp-action="Login" method="post" class="row login_form" id="contactForm">
 						<div asp-validation-summary="All" class="text-danger"></div>
 						<div class="col-md-12 form-group">
-							<input asp-for="Email" type="email" class="form-control" id="email" name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
+							<input asp-for="Email" type="email" class="form-control" id="Email" name="Email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
 								<span asp-validation-for="Email" class="text-danger"></span>
 						</div>
 						<div class="col-md-12 form-group">
-								<input asp-for="Password" type="password" class="form-control" id="name" name="name" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+								<input asp-for="Password" type="password" class="form-control" id="Password" name="Password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
 									<span asp-validation-for="Password" class="text-danger"></span>
 						</div>
 						

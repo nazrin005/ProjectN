@@ -8,5 +8,7 @@ namespace ProjectN.Models
         public  string Surname { get; set; }
         public  bool IsAdmin { get; set; }
         public bool IsDeleted { get; set; }
+        public List<Review> Reviews { get; set; }
+        public List<Wishlist> Wishlists { get; set; }
     }
 }

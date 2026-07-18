@@ -11,6 +11,8 @@ namespace ProjectN.Models
         public Category Category { get; set; }
         public int? CategoryId { get; set; }
         public string? ImageUrl { get; set; }
+        public List<Review> Reviews { get; set; }
+        public List<Wishlist> Wishlists { get; set; }
 
     }
 }
