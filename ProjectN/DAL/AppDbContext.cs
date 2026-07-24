@@ -12,6 +12,9 @@ namespace ProjectN.DAL
         public DbSet<Tag>  Tags { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Wishlist> Wishlists { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
     }
 }

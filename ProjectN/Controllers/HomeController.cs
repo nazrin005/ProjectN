@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectN.DAL;
 using ProjectN.Models;
+using ProjectN.ViewModels.Home;
 
 namespace ProjectN.Controllers
 {
@@ -23,12 +24,22 @@ namespace ProjectN.Controllers
                 .Include(p=>p.Tags)
                 .Include(p => p.Wishlists)
                 .ToListAsync();
-
+            List<Product> bestSellers = await _db.Products
+                .Include(p => p.Category)
+                .Include(p => p.OrderItems)
+                .OrderByDescending(p => p.OrderItems.Sum(oi => oi.Count))
+                .Take(4)
+                .ToListAsync();
             AppUser? user = await _userManager.GetUserAsync(User);
 
             ViewBag.UserId = user?.Id;
+            HomeVM vm = new HomeVM
+            {
+                Products = products,
+                BestSellers = bestSellers
+            };
 
-            return View(products);
+            return View(vm);
         }
         public async Task<IActionResult> Details(int? id)
         {

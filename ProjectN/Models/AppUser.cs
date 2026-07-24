@@ -10,5 +10,7 @@ namespace ProjectN.Models
         public bool IsDeleted { get; set; }
         public List<Review> Reviews { get; set; }
         public List<Wishlist> Wishlists { get; set; }
+        public List<Cart> Carts { get; set; }
+        public List<Order>? Orders { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace ProjectN.Areas.Admin.ViewModels.Products
         public string Description { get; set; }
         [Required(ErrorMessage = "Price is required")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than 0")]
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
         [Required(ErrorMessage = "Tag is required")]
         public List<int> TagIds { get; set; }
         [Required(ErrorMessage = "Category is required")]

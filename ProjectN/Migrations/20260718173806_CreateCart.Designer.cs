@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectN.DAL;
 
@@ -11,9 +12,11 @@ using ProjectN.DAL;
 namespace ProjectN.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260718173806_CreateCart")]
+    partial class CreateCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -299,71 +302,6 @@ namespace ProjectN.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("ProjectN.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("ProjectN.Models.OrderItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderItems");
-                });
-
             modelBuilder.Entity("ProjectN.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -389,7 +327,7 @@ namespace ProjectN.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -569,40 +507,6 @@ namespace ProjectN.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ProjectN.Models.Order", b =>
-                {
-                    b.HasOne("ProjectN.Models.AppUser", "AppUser")
-                        .WithMany("Orders")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectN.Models.Product", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("ProductId");
-
-                    b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("ProjectN.Models.OrderItem", b =>
-                {
-                    b.HasOne("ProjectN.Models.Order", "Order")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectN.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("ProjectN.Models.Product", b =>
                 {
                     b.HasOne("ProjectN.Models.Category", "Category")
@@ -654,8 +558,6 @@ namespace ProjectN.Migrations
                 {
                     b.Navigation("Carts");
 
-                    b.Navigation("Orders");
-
                     b.Navigation("Reviews");
 
                     b.Navigation("Wishlists");
@@ -666,16 +568,9 @@ namespace ProjectN.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("ProjectN.Models.Order", b =>
-                {
-                    b.Navigation("OrderItems");
-                });
-
             modelBuilder.Entity("ProjectN.Models.Product", b =>
                 {
                     b.Navigation("Carts");
-
-                    b.Navigation("Orders");
 
                     b.Navigation("Reviews");
 
