@@ -1,0 +1,56 @@
+﻿@using ProjectN.Models
+@model List<HeroBanner>
+<div>
+    <a asp-controller="HeroBanner" asp-action="Create" class="btn btn-primary">Create HeroBanner</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Subtitle</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col">Button Text</th>
+                <th scope="col">Active</th>
+                <th scope="col">Deleted Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (HeroBanner heroBanner in Model)
+            {
+                <tr>
+                    <th scope="row">@heroBanner.Id</th>
+                    <td>@heroBanner.Title</td>
+                    <td>@heroBanner.Subtitle</td>
+                    <td>@heroBanner.Description</td>
+                    <td>
+                        <img height="80px" width="80px" src="~/uploads/heroBanners/@heroBanner.ImageUrl" />
+                    </td>
+                    <td>@heroBanner.ButtonText</td>
+                    <td>@heroBanner.IsActive</td>
+                    <td>@heroBanner.IsDeleted</td>
+                  
+                    <td>
+                        @if (heroBanner.IsDeleted)
+                        {
+                            <form asp-controller="HeroBanner" asp-action="Restore" asp-route-id="@heroBanner.Id">
+                                <button type="submit" class="btn btn-success">Restore</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-controller="HeroBanner" asp-action="Delete" asp-route-id="@heroBanner.Id">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" asp-controller="HeroBanner" asp-action="Update" asp-route-id="@heroBanner.Id">Update</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

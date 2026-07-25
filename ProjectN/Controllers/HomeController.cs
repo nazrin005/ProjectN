@@ -30,13 +30,19 @@ namespace ProjectN.Controllers
                 .OrderByDescending(p => p.OrderItems.Sum(oi => oi.Count))
                 .Take(4)
                 .ToListAsync();
+            Campaign? campaign = await _db.Campaigns
+                .FirstOrDefaultAsync(c => c.IsActive && !c.IsDeleted);
+            HeroBanner? heroBanner = await _db.HeroBanners
+                .FirstOrDefaultAsync(x => x.IsActive && !x.IsDeleted);
             AppUser? user = await _userManager.GetUserAsync(User);
 
             ViewBag.UserId = user?.Id;
             HomeVM vm = new HomeVM
             {
                 Products = products,
-                BestSellers = bestSellers
+                BestSellers = bestSellers,
+                Campaign = campaign,
+                HeroBanner = heroBanner
             };
 
             return View(vm);

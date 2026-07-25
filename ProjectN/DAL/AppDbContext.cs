@@ -15,6 +15,8 @@ namespace ProjectN.DAL
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Campaign> Campaigns { get; set; }
+        public DbSet<HeroBanner> HeroBanners { get; set; }
 
     }
 }

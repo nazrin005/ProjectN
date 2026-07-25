@@ -1,0 +1,56 @@
+﻿@using ProjectN.Models
+@model List<Campaign>
+<div>
+    <a asp-controller="Campaign" asp-action="Create" class="btn btn-primary">Create Campaign</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Subtitle</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col">Button Text</th>
+                <th scope="col">Active</th>
+                <th scope="col">Deleted Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (Campaign campaign in Model)
+            {
+                <tr>
+                    <th scope="row">@campaign.Id</th>
+                    <td>@campaign.Title</td>
+                    <td>@campaign.Subtitle</td>
+                    <td>@campaign.Description</td>
+                    <td>
+                        <img height="80px" width="80px" src="~/uploads/campaigns/@campaign.ImageUrl" />
+                    </td>
+                    <td>@campaign.ButtonText</td>
+                    <td>@campaign.IsActive</td>
+                    <td>@campaign.IsDeleted</td>
+                  
+                    <td>
+                        @if (campaign.IsDeleted)
+                        {
+                            <form asp-controller="Campaign" asp-action="Restore" asp-route-id="@campaign.Id">
+                                <button type="submit" class="btn btn-success">Restore</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-controller="Campaign" asp-action="Delete" asp-route-id="@campaign.Id">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" asp-controller="Campaign" asp-action="Update" asp-route-id="@campaign.Id">Update</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
