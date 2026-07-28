@@ -18,6 +18,8 @@ namespace ProjectN.DAL
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<HeroBanner> HeroBanners { get; set; }
         public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Newsletter> Newsletters { get; set; }
+        public DbSet<ContactMessage> ContactMessages { get; set; }
 
     }
 }

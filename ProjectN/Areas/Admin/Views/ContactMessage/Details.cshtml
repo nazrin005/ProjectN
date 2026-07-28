@@ -1,0 +1,41 @@
+﻿@using ProjectN.Models
+@model ContactMessage
+
+<div class="container-fluid">
+
+    <h3 class="mb-4">Contact Message Details</h3>
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="mb-3">
+                <strong>Name:</strong>
+                <p>@Model.Name</p>
+            </div>
+
+            <div class="mb-3">
+                <strong>Email:</strong>
+                <p>@Model.Email</p>
+            </div>
+
+            <div class="mb-3">
+                <strong>Subject:</strong>
+                <p>@Model.Subject</p>
+            </div>
+
+            <div class="mb-3">
+                <strong>Message:</strong>
+                <p style="white-space: pre-wrap">@Model.Message</p>
+            </div>
+
+            <a asp-action="Index"
+                   class="btn btn-secondary">
+                Back
+            </a>
+
+        </div>
+
+    </div>
+
+</div> 

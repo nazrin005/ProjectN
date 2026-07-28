@@ -1,0 +1,33 @@
+﻿@using ProjectN.Models
+@model List<Newsletter>
+
+<div class="container mt-4">
+
+    <h2>Newsletter Subscribers</h2>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                int count = 1;
+            }
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@count</td>
+                    <td>@item.Email</td>
+                </tr>
+
+                count++;
+            }
+        </tbody>
+    </table>
+
+</div>
