@@ -1,0 +1,103 @@
+﻿@using ProjectN.Models
+@model ProjectN.ViewModels.Category.CategoryDetailsVM
+
+<!-- ================ Category Products ================= -->
+<section class="section-margin calc-60px">
+    <div class="container">
+
+        <div class="section-intro pb-60px">
+            <p>Category</p>
+            <h2>
+                @Model.Category.Name
+                <span class="section-intro__style">Products</span>
+            </h2>
+        </div>
+
+        @if (Model.Products.Any())
+        {
+            <div class="row">
+
+                @foreach (Product product in Model.Products)
+                {
+                    bool isWishlisted = product.Wishlists.Any(w => w.AppUserId == ViewBag.UserId);
+
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="card text-center card-product">
+
+                            <div class="card-product__img">
+
+                                <img class="card-img"
+                                     src="~/uploads/products/@product.ImageUrl"
+                                     alt="@product.Name">
+
+                                    <ul class="card-product__imgOverlay">
+
+                                        <li>
+                                            <button>
+                                                <a asp-controller="Home"
+                                                       asp-action="Details"
+                                                       asp-route-id="@product.Id"
+                                                       class="ti-search">
+                                                </a>
+                                            </button>
+                                        </li>
+
+                                        <li>
+                                            <button onclick="location.href='@Url.Action("AddToCart","Cart",new { id = product.Id })'">
+                                                <i class="ti-shopping-cart"></i>
+                                            </button>
+                                        </li>
+
+                                        <li>
+                                            <a asp-controller="Wishlist"
+                                                   asp-action="Toggle"
+                                                   asp-route-id="@product.Id">
+
+                                                @if (isWishlisted)
+                                                {
+                                                    <i class="fas fa-heart text-danger"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="far fa-heart"></i>
+                                                }
+
+                                            </a>
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+
+                                <div class="card-body">
+                                    <p>@product.Category.Name</p>
+
+                                    <h4 class="card-product__title">
+                                        <a asp-controller="Home"
+                                               asp-action="Details"
+                                               asp-route-id="@product.Id">
+                                            @product.Name
+                                        </a>
+                                    </h4>
+
+                                    <p class="card-product__price">
+                                        $@product.Price
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            }
+        else
+            {
+                <div class="text-center">
+                    <h4>No products found in this category.</h4>
+                </div>
+            }
+
+        </div>
+    </section>
+    <!-- ================ End Category Products ================= -->

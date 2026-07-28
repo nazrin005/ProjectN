@@ -34,6 +34,15 @@ namespace ProjectN.Controllers
                 .FirstOrDefaultAsync(c => c.IsActive && !c.IsDeleted);
             HeroBanner? heroBanner = await _db.HeroBanners
                 .FirstOrDefaultAsync(x => x.IsActive && !x.IsDeleted);
+            List<Category> categories = await _db.Categories
+                .Where(c => !c.IsDeleted)
+                .ToListAsync();
+            var blogs = await _db.Blogs
+                .Where(x => !x.IsDeleted)
+                .OrderByDescending(x => x.CreatedAt)
+                .Take(3)
+                .ToListAsync();
+
             AppUser? user = await _userManager.GetUserAsync(User);
 
             ViewBag.UserId = user?.Id;
@@ -41,8 +50,10 @@ namespace ProjectN.Controllers
             {
                 Products = products,
                 BestSellers = bestSellers,
+                Categories = categories,
                 Campaign = campaign,
-                HeroBanner = heroBanner
+                HeroBanner = heroBanner,
+                Blogs = blogs
             };
 
             return View(vm);

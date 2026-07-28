@@ -1,0 +1,58 @@
+﻿@using ProjectN.Areas.Admin.ViewModels.Blogs
+@model UpdateBlogVM
+
+<div>
+    <h2>Update Blog</h2>
+
+    <form asp-controller="Blog"
+          asp-action="Update"
+          method="post"
+          enctype="multipart/form-data">
+
+        <input asp-for="Id" hidden />
+        <input asp-for="ImageUrl" hidden />
+
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" placeholder="Enter title" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" placeholder="Enter description" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Content"></label>
+            <textarea asp-for="Content"
+                      class="form-control"
+                      rows="6"
+                      placeholder="Enter blog content"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <img src="~/uploads/blogs/@Model.ImageUrl"
+                 width="120"
+                 class="rounded border" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ImageFile">Select New Image</label>
+            <input asp-for="ImageFile" type="file" class="form-control" />
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+        </div>
+
+        <div class="form-check mt-3 mb-3">
+            <input asp-for="IsFeatured" class="form-check-input" />
+            <label asp-for="IsFeatured" class="form-check-label"></label>
+        </div>
+
+        <button type="submit" class="btn btn-warning">
+            Update
+        </button>
+
+    </form>
+</div>

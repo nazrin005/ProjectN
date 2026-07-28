@@ -17,5 +17,17 @@
             }
             return fileName;
         }
+        public static void DeleteFile(this string? fileName, IWebHostEnvironment env, string folder)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+                return;
+
+            string path = Path.Combine(env.WebRootPath, folder, fileName);
+
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
     }
 }

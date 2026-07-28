@@ -6,6 +6,8 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
             <th scope="col">Deleted Status</th>
             <th scope="col">Actions</th>
         </tr>
@@ -17,6 +19,10 @@
                 <tr>
                     <th scope="row">@category.Id</th>
                     <td>@category.Name</td>
+                    <td>@category.Description</td>
+                    <td>
+                        <img height="80px" width="80px" src="~/uploads/categories/@category.ImageUrl" />
+                    </td>
                     <td>@category.IsDeleted</td>
                     <td>
                         @if (category.IsDeleted == true)

@@ -1,0 +1,88 @@
+﻿@using ProjectN.Models
+@model List<Blog>
+
+<div>
+    <a asp-controller="Blog" asp-action="Create" class="btn btn-primary">
+        Create Blog
+    </a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Image</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Author</th>
+                <th scope="col">Featured</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Deleted Status</th>
+                <th scope="col">Actions</th>
+                <th scope="col">Update</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (Blog blog in Model)
+            {
+                <tr>
+                    <th scope="row">@blog.Id</th>
+
+                    <td>
+                        <img height="80" width="80"
+                             src="~/uploads/blogs/@blog.ImageUrl" />
+                    </td>
+
+                    <td>@blog.Title</td>
+
+                    <td>@blog.Description</td>
+
+                    <td>@blog.Author</td>
+
+                    <td>@blog.IsFeatured</td>
+
+                    <td>@blog.CreatedAt.ToString("dd.MM.yyyy")</td>
+
+                    <td>@blog.IsDeleted</td>
+
+                    <td>
+                        @if (blog.IsDeleted)
+                        {
+                            <form asp-controller="Blog"
+                                  asp-action="Restore"
+                                  asp-route-id="@blog.Id"
+                                  method="post">
+                                <button type="submit" class="btn btn-success">
+                                    Restore
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-controller="Blog"
+                                  asp-action="Delete"
+                                  asp-route-id="@blog.Id"
+                                  method="post">
+                                <button type="submit" class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </form>
+                        }
+                    </td>
+
+                    <td>
+                        <a class="btn btn-warning"
+                               asp-controller="Blog"
+                               asp-action="Update"
+                               asp-route-id="@blog.Id">
+                            Update
+                        </a>
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
