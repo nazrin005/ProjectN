@@ -20,10 +20,56 @@
                         <span asp-validation-for="@Model.Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label for="ImageFile">Select Image</label>
-                        <input asp-for="@Model.ImageFile" type="file" class="form-control" id="ImageFile">
-                            <span asp-validation-for="@Model.ImageFile" class="text-danger"></span>
-                        </div>
+                        <label>Current Main Image</label>
+                        <br />
+
+                        <img src="~/uploads/products/@Model.ImageUrl"
+                             width="150"
+                             class="mb-3 border rounded" />
+
+                        <input asp-for="ImageFile" type="file" class="form-control" />
+
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+
+                    <hr />
+
+                    <h5>Additional Images</h5>
+
+                    <div class="row mb-3">
+
+                        @foreach (var image in Model.ProductImages)
+                        {
+                            <div class="col-md-3 text-center mb-3">
+
+                                <img src="~/uploads/products/@image.ImageUrl"
+                                     class="img-fluid border rounded mb-2"
+                                     style="height:120px;object-fit:cover;" />
+
+                                <br />
+
+                                <a asp-action="DeleteImage"
+                                       asp-route-id="@image.Id"
+                                       class="btn btn-danger btn-sm">
+                                    Delete
+                                </a>
+
+                            </div>
+                        }
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Add New Images</label>
+
+                        <input asp-for="ImageFiles"
+                               type="file"
+                               multiple
+                               class="form-control" />
+
+                        <span asp-validation-for="ImageFiles"
+                              class="text-danger"></span>
+                    </div>
                         <div class="form-group">
                             <select asp-for="CategoryId" class="form-select" aria-label="Select Category">
                                 <option disabled selected>Open this select menu</option>

@@ -11,7 +11,7 @@ namespace ProjectN.Areas.Admin.ViewModels.Products
         [MinLength(3, ErrorMessage = "Name must be at least 3 symbols")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Description is required")]
-        [StringLength(30, ErrorMessage = "Description can not exceed 50 chracters.")]
+        [StringLength(500, ErrorMessage = "Description can not exceed 500 chracters.")]
         [MinLength(3, ErrorMessage = "Description must be at least 10 symbols")]
         public string Description { get; set; }
         [Required(ErrorMessage = "Price is required")]
@@ -22,6 +22,11 @@ namespace ProjectN.Areas.Admin.ViewModels.Products
         [Required(ErrorMessage = "Category is required")]
         public int? CategoryId { get; set; }
         public string? ImageUrl { get; set; }
-        public IFormFile ImageFile { get; set; }
+
+        public IFormFile? ImageFile { get; set; }
+
+        public List<IFormFile>? ImageFiles { get; set; }
+
+        public List<ProductImage>? ProductImages { get; set; }
     }
 }

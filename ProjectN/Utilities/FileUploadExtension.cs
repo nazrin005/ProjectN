@@ -5,7 +5,7 @@
         public static string SaveImage(this IFormFile ImageFile, IWebHostEnvironment env, string folder)
         {
             string path = Path.Combine(env.WebRootPath, folder);
-            string fileName = ImageFile.FileName;
+            string fileName = Guid.NewGuid() + Path.GetExtension(ImageFile.FileName);
             string fullpath = Path.Combine(path, fileName);
             if (!Directory.Exists(path))
             {

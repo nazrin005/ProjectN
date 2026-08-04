@@ -31,8 +31,11 @@ namespace ProjectN.Controllers
             return View(carts);
         }
 
-        public async Task<IActionResult> AddToCart(int id)
+        public async Task<IActionResult> AddToCart(int id, int count = 1)
         {
+            if (count < 1)
+                count = 1;
+
             AppUser? user = await _userManager.GetUserAsync(User);
 
             Product? product = await _db.Products
@@ -47,7 +50,7 @@ namespace ProjectN.Controllers
 
             if (cart != null)
             {
-                cart.Count++;
+                cart.Count += count;
             }
             else
             {
@@ -55,7 +58,7 @@ namespace ProjectN.Controllers
                 {
                     ProductId = id,
                     AppUserId = user.Id,
-                    Count = 1
+                    Count = count
                 };
 
                 await _db.Carts.AddAsync(cart);

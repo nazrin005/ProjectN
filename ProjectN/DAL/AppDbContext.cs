@@ -20,6 +20,7 @@ namespace ProjectN.DAL
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Newsletter> Newsletters { get; set; }
         public DbSet<ContactMessage> ContactMessages { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
     }
 }

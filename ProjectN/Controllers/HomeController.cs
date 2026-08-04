@@ -20,11 +20,13 @@ namespace ProjectN.Controllers
         public async Task<IActionResult> Index()
         {
             List<Product> products = await _db.Products
+                .Where(p => !p.IsDeleted)
                 .Include(p => p.Category)
                 .Include(p=>p.Tags)
                 .Include(p => p.Wishlists)
                 .ToListAsync();
             List<Product> bestSellers = await _db.Products
+                .Where(p => !p.IsDeleted)
                 .Include(p => p.Category)
                 .Include(p => p.OrderItems)
                 .OrderByDescending(p => p.OrderItems.Sum(oi => oi.Count))
@@ -65,10 +67,12 @@ namespace ProjectN.Controllers
                 return View();
             }
             Product? product = await _db.Products
+                .Where(p => !p.IsDeleted)
                 .Include(p => p.Category)
                 .Include(p => p.Tags)
+                .Include(p => p.ProductImages)
                 .Include(p => p.Reviews)
-                .ThenInclude(r => r.AppUser)
+                   .ThenInclude(r => r.AppUser)
                 .Include(p => p.Wishlists)
                 .FirstOrDefaultAsync(p => p.Id == id);
             AppUser? user = await _userManager.GetUserAsync(User);

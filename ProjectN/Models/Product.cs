@@ -15,5 +15,6 @@ namespace ProjectN.Models
         public List<Wishlist> Wishlists { get; set; }
         public List<Cart> Carts { get; set; }
         public List<OrderItem> OrderItems { get; set; } = new();
+        public List<ProductImage> ProductImages { get; set; } = new();
     }
 }
