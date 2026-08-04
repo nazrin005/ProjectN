@@ -13,12 +13,13 @@ namespace ProjectN.Controllers
             _db = db;
         }
         [HttpPost]
-        public async Task<IActionResult> Subscribe(Newsletter newsletter)
+        public async Task<IActionResult> Subscribe(Newsletter newsletter, string? returnUrl)
         {
             if (!ModelState.IsValid)
             {
                 TempData["Error"] = "Please enter a valid email address.";
-                return RedirectToAction("Index", "Home");
+
+                return Redirect(returnUrl ?? Url.Action("Index", "Home"));
             }
 
             bool exists = await _db.Newsletters
@@ -27,15 +28,17 @@ namespace ProjectN.Controllers
             if (exists)
             {
                 TempData["Error"] = "This email is already subscribed.";
-                return RedirectToAction("Index", "Home");
+
+                return Redirect(returnUrl ?? Url.Action("Index", "Home"));
             }
 
             _db.Newsletters.Add(newsletter);
+
             await _db.SaveChangesAsync();
 
             TempData["Success"] = "You have successfully subscribed!";
 
-            return RedirectToAction("Index", "Home");
+            return Redirect(returnUrl ?? Url.Action("Index", "Home"));
         }
     }
 }

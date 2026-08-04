@@ -2,7 +2,7 @@
 
 namespace ProjectN.ViewModels.Review
 {
-    public class CreateReviewVM
+    public record CreateReviewVM
     {
         [Required]
         [StringLength(500)]

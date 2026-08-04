@@ -2,7 +2,7 @@
 
 namespace ProjectN.ViewModels.Home
 {
-    public class HomeVM
+    public record HomeVM
     {
         public List<Product> Products { get; set; }
         public List<Product> BestSellers { get; set; }

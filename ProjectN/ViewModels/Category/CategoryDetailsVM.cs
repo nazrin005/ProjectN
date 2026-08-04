@@ -2,7 +2,7 @@
 
 namespace ProjectN.ViewModels.Category
 {
-    public class CategoryDetailsVM
+    public record CategoryDetailsVM
     {
         public Models.Category Category { get; set; }
 

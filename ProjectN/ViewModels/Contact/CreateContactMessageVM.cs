@@ -2,7 +2,7 @@
 
 namespace ProjectN.ViewModels.Contact
 {
-    public class CreateContactMessageVM
+    public record CreateContactMessageVM
     {
         [Required(ErrorMessage = "Name is required")]
         [MaxLength(50)]
