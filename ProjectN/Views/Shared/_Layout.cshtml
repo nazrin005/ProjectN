@@ -115,12 +115,11 @@
 						<div class="single-footer-widget tp_widgets">
 							<h4 class="footer_title">Quick Links</h4>
 							<ul class="list">
-								<li><a href="#">Home</a></li>
-								<li><a href="#">Shop</a></li>
-								<li><a href="#">Blog</a></li>
-								<li><a href="#">Product</a></li>
-								<li><a href="#">Brand</a></li>
-								<li><a href="#">Contact</a></li>
+								<li><a asp-controller="Home" asp-action="Index">Home</a></li>
+								<li><a asp-controller="Cart" asp-action="Index">Shopping Cart</a></li>
+								<li><a asp-controller="Blog" asp-action="Index">Blog</a></li>
+								<li><a asp-controller="Wishlist" asp-action="Index">Wishlist</a></li>
+								<li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
 							</ul>
 						</div>
 					</div>
@@ -153,7 +152,7 @@
 								</p>
 								<p>
 									+123 456 7890 <br>
-									+123 456 7890
+									+123 456 7891
 								</p>
 	
 								<p class="sm-head">
