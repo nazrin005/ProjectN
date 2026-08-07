@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectN.Areas.Admin.ViewModels.Tags;
 using ProjectN.DAL;
@@ -7,6 +8,7 @@ using ProjectN.Models;
 namespace ProjectN.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class TagController : Controller
     {
         private readonly AppDbContext _db;
